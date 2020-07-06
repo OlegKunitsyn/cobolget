@@ -9,10 +9,6 @@
 
 <h4 align="center">Command-line tool for COBOL Package Registry - cobolget.com</h4>
 
-<p align="center">
-  <img src="https://github.com/OlegKunitsyn/cobolget/workflows/Docker%20Image%20CI/badge.svg?branch=master" />
-</p>
-
 ### Features
 - List packages in the registry
 - Index (import new or update existing) packages from the repositories, such as
