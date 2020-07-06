@@ -1,0 +1,68 @@
+{
+  "name": "cobolget",
+  "version": "0.2.4",
+  "description": "COBOL Package Manager",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OlegKunitsyn/cobolget"
+  },
+  "homepage": "https://cobolget.com",
+  "keywords": [
+    "cobol",
+    "package manager",
+    "client"
+  ],
+  "author": "Olegs Kunicins",
+  "license": "GPL-2.0",
+  "main": "out/api.js",
+  "typings": "out/api.d.ts",
+  "bin": {
+    "cobolget": "out/cobolget"
+  },
+  "scripts": {
+    "copy-cobolget": "mkdir -p out && cp src/cobolget out/cobolget",
+    "compile": "tsc && yarn copy-cobolget",
+    "watch": "yarn copy-cobolget && tsc --watch",
+    "watch-test": "yarn copy-cobolget && concurrently \"tsc --watch\" \"mocha --watch\"",
+    "test": "mocha",
+    "prepublishOnly": "tsc && yarn copy-cobolget && mocha",
+    "cobolget": "out/cobolget"
+  },
+  "engines": {
+    "node": ">= 8"
+  },
+  "dependencies": {
+    "commander": "^2.8.1",
+    "glob": "^7.0.6",
+    "leven": "^3.1.0",
+    "lodash": "^4.17.15",
+    "parse-semver": "^1.1.1",
+    "semver": "^5.1.0",
+    "typed-rest-client": "1.2.0",
+    "unzipper": "^0.10.11",
+    "uuid": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/chai-as-promised": "^7.1.2",
+    "@types/glob": "^7.1.1",
+    "@types/lodash": "^4.14.157",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^8",
+    "@types/semver": "^6.0.0",
+    "@types/unzipper": "^0.10.3",
+    "@types/uuid": "^8.0.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "concurrently": "^5.1.0",
+    "mocha": "^7.1.1",
+    "source-map-support": "^0.4.2",
+    "typescript": "^3.4.3"
+  },
+  "mocha": {
+    "require": [
+      "source-map-support/register"
+    ],
+    "spec": "out/test"
+  }
+}

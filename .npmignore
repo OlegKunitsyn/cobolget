@@ -1,0 +1,14 @@
+.*.swp
+._*
+.DS_Store
+.git
+.npmrc
+.lock-wscript
+.wafpickle-*
+config.gypi
+npm-debug.log
+yarn-error.log
+modules/
+modules.json
+modules-lock.json
+assets/
