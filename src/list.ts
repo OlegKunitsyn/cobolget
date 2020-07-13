@@ -8,8 +8,8 @@ export async function list(keyword: string): Promise<any> {
 				[
 					'Search results:',
 					...tableView([
-						['Package', 'Origin'],
-						...results.map((item) => [item.name, item.url])
+						['Package', 'Description'],
+						...results.map((item) => [item.name, item.description])
 					]),
 				].map(line => wordTrim(line.replace(/\s+$/g, ''))).join('\n')
 			);

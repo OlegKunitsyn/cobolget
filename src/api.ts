@@ -37,7 +37,6 @@ export interface ApiDependency {
 export interface ApiVersion {
 	tag: string;
 	name: string;
-	url: string;
 	modules: Array<string>;
 	dialect: string;
 	dependencies: Array<ApiDependency>
@@ -45,6 +44,7 @@ export interface ApiVersion {
 
 export interface ApiPackage {
 	name: string;
+	description: string;
 	url: string;
 	versions: Array<ApiVersion>
 }
