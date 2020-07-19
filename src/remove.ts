@@ -11,22 +11,18 @@ export async function remove(dependency: string, options: DependencyOptions): Pr
 			console.log(`No manifest ${MANIFEST_NAME} found. Please run 'init' command`);
 			return;
 		}
-	
 		let manifest = JSON.parse(fs.readFileSync(manifestFile).toString());
+		
 		if (options.debug) {
 			delete manifest['dependencies-debug'][dependency];
 		} else {
 			delete manifest['dependencies'][dependency];
 		}
-		manifest = JSON.stringify(manifest, null, 2);
-	
+
 		// manifest valid?
-		try {
-			await validateManifest(manifest);
-		} catch (e) {
-			console.log(`An error occurred: ${e}`);
-		}
-	
+		manifest = JSON.stringify(manifest, null, 2);
+		await validateManifest(manifest);
+
 		// save
 		fs.writeFileSync(manifestFile, manifest);
 		if (options.debug) {

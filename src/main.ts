@@ -8,6 +8,7 @@ import { remove } from './remove';
 import { index } from './index';
 import { update } from './update';
 import { install } from './install';
+import { licenses } from './licenses';
 const pkg = require('../package.json');
 
 module.exports = function (argv: string[]): void {
@@ -52,14 +53,19 @@ module.exports = function (argv: string[]): void {
 
 	program
 		.command('update')
-		.description('Resolve dependencies and update lock-file')
+		.description('Resolve dependencies and update lockfile')
 		.action(() => update());
 
 	program
 		.command('install')
 		.option('-t, --token <token>', 'Team token')
-		.description('Install dependencies from lock-file')
+		.description('Install dependencies from lockfile')
 		.action((token) => install(token));
+
+	program
+		.command('licenses')
+		.description('List licenses of the installed packages')
+		.action(() => licenses());
 
 	program
 		.command('*', '', { noHelp: true })

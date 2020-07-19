@@ -70,14 +70,15 @@ export async function graph(name: string, packages: Object = {}): Promise<any> {
 	const pkg: ApiPackage = JSON.parse(await response.readBody());
 
 	packages[name] = {};
-	pkg.versions.forEach((version) => {
+	for (let version of pkg.versions) {
 		packages[name][version.tag] = {};
-		version.dependencies.forEach(async (dependency) => {
+		for (let dependency of version.dependencies) {
 			if (!dependency.isDebug) {
-				packages[dependency.package] = await graph(dependency.package, packages);
+				await graph(dependency.package, packages);
+				packages[name][version.tag][dependency.package] = dependency.satisfies;
 			}
-		});
-	});
+		}
+	}
 
 	return packages;
 }
@@ -167,4 +168,29 @@ export async function downloadZip(name: string, version: string, token: string =
 		throw new Error((body as ApiError).message);
 	}
 	throw new Error(`HTTP ${response.message.statusCode}`);
+}
+
+const columns = process.stdout.columns ? process.stdout.columns : 80;
+type ViewTableRow = string[];
+type ViewTable = ViewTableRow[];
+
+export function wordTrim(text: string, width: number = columns, indicator = '...') {
+	if (text.length > width) {
+		return text.substr(0, width - indicator.length) + indicator;
+	}
+	return text;
+}
+
+function repeatString(text: string, count: number): string {
+	let result: string = '';
+	for (let i = 0; i < count; i++) {
+		result += text;
+	}
+	return result;
+}
+
+export function tableView(table: ViewTable, spacing: number = 2): string[] {
+	const maxLen = {};
+	table.forEach(row => row.forEach((cell, i) => maxLen[i] = Math.max(maxLen[i] || 0, cell.length)));
+	return table.map(row => row.map((cell, i) => `${cell}${repeatString(' ', maxLen[i] - cell.length + spacing)}`).join(''));
 }

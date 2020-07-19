@@ -17,12 +17,13 @@
     - GitLab public
     - GitLab private
 - Initialize and validate `Manifest`
-- Add, remove and resolve dependencies into `Lock-file`
+- Add, remove and resolve dependencies into `Lockfile`
 - Install COBOL packages
 - COBOL dialects
     - gnucobol
     - entcobol
     - acucobol
+- List licenses of the installed packages
 
 ```
 $ cobolget
@@ -39,8 +40,9 @@ Commands:
   validate                       Validate manifest file
   add [options] <dependency>     Add package to the manifest
   remove [options] <dependency>  Remove package from the manifest
-  update                         Resolve dependencies and update lock-file
-  install [options]              Install dependencies from lock-file                             
+  update                         Resolve dependencies and update lockfile
+  install [options]              Install dependencies from lockfile
+  licenses                       List licenses of the installed packages
 ```
 
 #### Requirements
@@ -83,7 +85,7 @@ $ cobolget update
 Lockfile modules-lock.json updated
 ```
 
-The tool resolves direct and inherited dependencies in the `Manifest` and creates the `Lock-file` which contains exact versions of the packages.
+The tool resolves direct and inherited dependencies in the `Manifest` and creates the `Lockfile` which contains exact versions of the packages.
 Keeping `modules-lock.json` under a version control is important to re-install the same dependencies in other environments, e.g. Continuous Integration.
 
 Let's install the dependencies:
