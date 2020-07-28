@@ -14,7 +14,7 @@ export async function list(keyword: string): Promise<any> {
 				].map(line => wordTrim(line.replace(/\s+$/g, ''))).join('\n')
 			);
 		} else {
-			console.log('No matching results');
+			console.log('No matching results.');
 		}
 	} catch (e) {
 		console.log(`An error occurred: ${e}`);

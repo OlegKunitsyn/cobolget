@@ -7,7 +7,7 @@ export async function validate(): Promise<any> {
 		const manifestFile = path.join(process.cwd(), MANIFEST_NAME);
 		const manifest = fs.readFileSync(manifestFile).toString();
 		await validateManifest(manifest);
-		console.log(`Manifest ${MANIFEST_NAME} is valid`);
+		console.log(`Manifest ${MANIFEST_NAME} is valid.`);
 	} catch (e) {
 		console.log(`An error occurred: ${e}`);
 	}

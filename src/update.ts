@@ -11,7 +11,7 @@ export async function update(): Promise<any> {
 
 		// manifest exists?
 		if (!fs.existsSync(manifestFile)) {
-			console.log(`No manifest ${MANIFEST_NAME} found. Please run 'init' command`);
+			console.log(`No manifest ${MANIFEST_NAME} found. Please run 'init' command.`);
 			return;
 		}
 
@@ -43,7 +43,7 @@ export async function update(): Promise<any> {
 							}
 						});
 						fs.writeFileSync(lockFile, JSON.stringify(lodash.merge(debug, resolution), null, 2));
-						console.log(`Lockfile ${LOCK_NAME} updated`);
+						console.log(`Lockfile ${LOCK_NAME} updated.`);
 					},
 					error => {
 						throw Error(error);

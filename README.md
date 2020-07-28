@@ -70,7 +70,7 @@ To start using `cobolget` in your project you need the `Manifest` file which des
 ```
 $ npm install -g cobolget
 $ cobolget init
-Manifest modules.json created
+Manifest modules.json created.
 ```
 
 Now you can add a dependency which delivers additional functionality:
@@ -82,7 +82,7 @@ Dependency 'core-datetime' has been added to the manifest.
 By default, `cobolget` takes the latest version indexed on the Registry and adds it into `modules.json`.
 ```
 $ cobolget update
-Lockfile modules-lock.json updated
+Lockfile modules-lock.json updated.
 ```
 
 The tool resolves direct and inherited dependencies in the `Manifest` and creates the `Lockfile` which contains exact versions of the packages.
@@ -101,7 +101,7 @@ modules/core-datetime/src/datetime.cbl
 modules/core-datetime/tests/
 modules/core-datetime/tests/datetime-test.cbl
 modules/core-datetime/tests/modules.cpy
-Copybook modules.cpy updated
+Copybook modules.cpy updated.
 ```
 
 Directory `modules` contains source-code from `core-datetime` package and `modules.cpy`, a Copybook with all COBOL modules ready for inclusion into your project.
@@ -138,16 +138,30 @@ New releases of the package you can index by a name:
 $ cobolget index core-datetime
 ```
 
-For indexing of private packages you must submit `Repository Token` 
-(see [GitLab](https://gitlab.com/profile/personal_access_tokens) or [GitHub](https://github.com/settings/tokens/new) instructions) 
-to associate a package with the Organization:
+For indexing private packages you must submit `Repository Token` to associate a package with the Organization. 
+Follow [GitLab](https://gitlab.com/profile/personal_access_tokens) or [GitHub](https://github.com/settings/tokens/new) instructions.
+In the example below Organization is `cobolget`, but use your own.
 ```
 $ cobolget -t DMNZpM9LzMyvswqE6yzz -o cobolget index https://gitlab.com/OlegKunitsyn/core-network
 ```
 
+#### Versioning
+COBOLget implements [SemVer](https://semver.org/) versioning standard. You can specify constraints in the `Manifest` to satisfy concrete versions of the dependencies.
+
+| Operator | Constraint             | Example                  |
+|----------|------------------------|--------------------------|
+| *        | Any (default)          | "core-string": "*"       |
+| <        | Less than              | "core-string": "<1.0.2"  |
+| <=       | Less or equal to       | "core-string": "<=1.0.2" |
+| >        | Greater than           | "core-string": ">1.0.2"  |
+| >=       | Greater or equal to    | "core-string": ">=1.0.2" |
+| =        | Equal                  | "core-string": "=1.0.2"  |
+| x        | Stand in               | "core-string": "1.0.x"   |
+| ~        | Approximately equal to | "core-string": "~1.0.1"  |
+
 #### Development
-- Cobolget API documentation - [https://cobolget.com/doc/](https://cobolget.com/doc/)
-- Cobolget API client - [GitHub](https://github.com/OlegKunitsyn/cobolget)
-- `Manifest` JSON schema - [https://cobolget.com/schema.json](https://cobolget.com/schema.json)
+- [API documentation](https://cobolget.com/doc/)
+- [API client](https://github.com/OlegKunitsyn/cobolget)
+- [Schema](https://cobolget.com/schema.json)
 
 Your contribution is always welcome!
