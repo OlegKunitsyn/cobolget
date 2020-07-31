@@ -26,7 +26,8 @@
     "watch-test": "yarn copy-cobolget && concurrently \"tsc --watch\" \"mocha --watch\"",
     "test": "mocha",
     "prepublishOnly": "tsc && yarn copy-cobolget && mocha",
-    "cobolget": "out/cobolget"
+    "cobolget": "out/cobolget",
+    "build-alpine": "mkdir -p bin && pkg -t node8-alpine-x64 --out-path bin . && chmod +x bin/cobolget"
   },
   "engines": {
     "node": ">= 8"
@@ -64,5 +65,8 @@
       "source-map-support/register"
     ],
     "spec": "out/test"
+  },
+  "pkg": {
+    "scripts": "out/*.js"
   }
 }

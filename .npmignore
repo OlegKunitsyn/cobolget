@@ -12,3 +12,4 @@ modules/
 modules.json
 modules-lock.json
 assets/
+bin/
