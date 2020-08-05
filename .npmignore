@@ -13,3 +13,5 @@ modules.json
 modules-lock.json
 assets/
 bin/
+src/
+out/test

@@ -1,6 +1,6 @@
 {
   "name": "cobolget",
-  "version": "1.9.9",
+  "version": "1.9.10",
   "description": "COBOL Package Manager",
   "repository": {
     "type": "git",

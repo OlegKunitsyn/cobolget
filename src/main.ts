@@ -10,6 +10,7 @@ import { update } from './update';
 import { install } from './install';
 import { licenses } from './licenses';
 const pkg = require('../package.json');
+console.log(`COBOLget ${pkg.version} by Olegs Kunicins and contributors.\n`);
 
 module.exports = function (argv: string[]): void {
 
