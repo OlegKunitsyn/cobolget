@@ -7,7 +7,12 @@
   <br>
 </h1>
 
-<h4 align="center">Command-line tool for COBOL Package Registry - cobolget.com</h4>
+<h4 align="center">Command-line tool for <a href="https://cobolget.com">COBOL Package Registry</a></h4>
+
+<p align="center">
+  <img src="https://github.com/OlegKunitsyn/cobolget/workflows/nodejs-ci/badge.svg" />
+  <a href="https://npmjs.com/package/cobolget" title="View project on NPM"><img src="https://img.shields.io/npm/dm/cobolget.svg" alt="Downloads" /></a>
+</p>
 
 #### Features
 - List packages in the registry
