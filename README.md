@@ -28,7 +28,7 @@
 - COBOL dialects
     - gnucobol
     - entcobol
-    - acucobol
+    - icobol
 - List licenses of the installed packages
 
 ```
@@ -62,7 +62,7 @@ $ npm install -g cobolget
 #### Package Management
 The [Registry](https://cobolget.com) helps you distribute and integrate COBOL libraries into your projects by using 
 [cobolget](https://github.com/OlegKunitsyn/cobolget), an open-source command-line tool.
-You can transparently integrate packages from GitHub, GitLab or Gitee repositories, written in `gnucobol`, `entcobol` or `acucobol` COBOL dialects.
+You can transparently integrate packages from GitHub, GitLab or Gitee repositories, written in `gnucobol`, `entcobol` or `icobol` COBOL dialects.
 As well as public packages, the Registry lets you import your own private packages making COBOL code shared within your 
 Organization only. You can manage `Teams` and `Team Tokens` granting per-team installation rights for a limited period of time.
 
