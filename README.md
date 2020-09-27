@@ -26,9 +26,9 @@
 - Add, remove and resolve dependencies into `Lockfile`
 - Install COBOL packages
 - COBOL dialects
-    - gnucobol
-    - entcobol
-    - icobol
+    - GnuCOBOL
+    - IBM Enterprise COBOL
+    - Fujitsu NetCOBOL
 - List licenses of the installed packages
 
 ```
@@ -62,7 +62,7 @@ $ npm install -g cobolget
 #### Package Management
 The [Registry](https://cobolget.com) helps you distribute and integrate COBOL libraries into your projects by using 
 [cobolget](https://github.com/OlegKunitsyn/cobolget), an open-source command-line tool.
-You can transparently integrate packages from GitHub, GitLab or Gitee repositories, written in `gnucobol`, `entcobol` or `icobol` COBOL dialects.
+You can transparently integrate packages from GitHub, GitLab or Gitee repositories, written in `gnucobol`, `entcobol` or `netcobol` COBOL dialects.
 As well as public packages, the Registry lets you import your own private packages making COBOL code shared within your 
 Organization only. You can manage `Teams` and `Team Tokens` granting per-team installation rights for a limited period of time.
 
@@ -114,6 +114,8 @@ Directory `modules` contains source-code from `core-datetime` package and `modul
 
 For installing a private package you need the `Team Token` from your `Organization`:
 ```
+$ cobolget add core-network
+$ cobolget update
 $ cobolget -t bca12d6c4efed0627c87f2e576b72bdb5ab88e34 install
 ```
 
