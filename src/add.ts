@@ -8,7 +8,7 @@ export async function add(dependency: string, options: DependencyOptions): Promi
 
 		// manifest exists?
 		if (!fs.existsSync(manifestFile)) {
-			console.log(`No manifest ${MANIFEST_NAME} found. Please run 'init' command`);
+			console.log(`No manifest ${MANIFEST_NAME} found. Please run 'init' command.`);
 			return;
 		}
 		let manifest = JSON.parse(fs.readFileSync(manifestFile).toString());
@@ -34,6 +34,6 @@ export async function add(dependency: string, options: DependencyOptions): Promi
 			console.log(`Dependency '${dependency}' has been added to the manifest.`);
 		}
 	} catch (e) {
-		console.log(`An error occurred: ${e}`);
+		console.log(`An error occurred: ${e}.`);
 	}
 }

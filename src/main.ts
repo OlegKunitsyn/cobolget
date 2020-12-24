@@ -1,6 +1,7 @@
 import * as program from 'commander';
 import * as leven from 'leven';
 import { list } from './list';
+import { run } from './run';
 import { init } from './init';
 import { validate } from './validate';
 import { add } from './add';
@@ -67,6 +68,11 @@ module.exports = function (argv: string[]): void {
 		.command('licenses')
 		.description('List licenses of the installed packages')
 		.action(() => licenses());
+
+	program
+		.command('run <script>')
+		.description('Run script defined in the manifest')
+		.action((script) => run(script));
 
 	program
 		.command('*', '', { noHelp: true })

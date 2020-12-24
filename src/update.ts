@@ -55,6 +55,6 @@ export async function update(): Promise<any> {
 			}
 		);
 	} catch (e) {
-		console.log(`An error occurred: ${e}`);
+		console.log(`An error occurred: ${e}.`);
 	}
 }

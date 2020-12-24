@@ -8,6 +8,6 @@ export async function init(): Promise<any> {
 		fs.writeFileSync(manifestFile, JSON.stringify(MANIFEST_INIT, null, 2));
 		console.log(`Manifest ${MANIFEST_NAME} created.`);
 	} catch (e) {
-		console.log(`An error occurred: ${e}`);
+		console.log(`An error occurred: ${e}.`);
 	}
 }

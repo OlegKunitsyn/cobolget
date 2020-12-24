@@ -21,7 +21,7 @@ export async function licenses(): Promise<any> {
 			].map(line => wordTrim(line.replace(/\s+$/g, ''))).join('\n')
 		);
 	} catch (e) {
-		console.log(`An error occurred: ${e}`);
+		console.log(`An error occurred: ${e}.`);
 	}
 }
 

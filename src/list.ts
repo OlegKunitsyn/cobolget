@@ -17,6 +17,6 @@ export async function list(keyword: string): Promise<any> {
 			console.log('No matching results.');
 		}
 	} catch (e) {
-		console.log(`An error occurred: ${e}`);
+		console.log(`An error occurred: ${e}.`);
 	}
 }

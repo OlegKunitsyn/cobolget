@@ -8,7 +8,7 @@ export async function remove(dependency: string, options: DependencyOptions): Pr
 
 		// manifest exists?
 		if (!fs.existsSync(manifestFile)) {
-			console.log(`No manifest ${MANIFEST_NAME} found. Please run 'init' command`);
+			console.log(`No manifest ${MANIFEST_NAME} found. Please run 'init' command.`);
 			return;
 		}
 		let manifest = JSON.parse(fs.readFileSync(manifestFile).toString());
@@ -31,6 +31,6 @@ export async function remove(dependency: string, options: DependencyOptions): Pr
 			console.log(`Dependency '${dependency}' has been removed from the manifest.`);
 		}
 	} catch (e) {
-		console.log(`An error occurred: ${e}`);
+		console.log(`An error occurred: ${e}.`);
 	}
 }

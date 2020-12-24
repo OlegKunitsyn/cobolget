@@ -30,6 +30,7 @@
     - IBM Enterprise COBOL
     - Fujitsu NetCOBOL
 - List licenses of the installed packages
+- Run scripts
 
 ```
 $ cobolget
@@ -49,6 +50,7 @@ Commands:
   update                         Resolve dependencies and update lockfile
   install [options]              Install dependencies from lockfile
   licenses                       List licenses of the installed packages
+  run                            Run script defined in the manifest
 ```
 
 #### Requirements

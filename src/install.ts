@@ -55,6 +55,6 @@ export async function install(options: IndexOptions): Promise<any> {
 		fs.writeFileSync(path.join(process.cwd(), MODULES_DIR, COPYBOOK_NAME), copybook.join("\n"));
 		console.log(`Copybook ${COPYBOOK_NAME} updated.`);
 	} catch (e) {
-		console.log(`An error occurred: ${e}`);
+		console.log(`An error occurred: ${e}.`);
 	}
 }

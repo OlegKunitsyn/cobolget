@@ -9,6 +9,6 @@ export async function validate(): Promise<any> {
 		await validateManifest(manifest);
 		console.log(`Manifest ${MANIFEST_NAME} is valid.`);
 	} catch (e) {
-		console.log(`An error occurred: ${e}`);
+		console.log(`An error occurred: ${e}.`);
 	}
 }
