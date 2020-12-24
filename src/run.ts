@@ -21,7 +21,7 @@ export async function run(script: string): Promise<any> {
 			return;
 		}
 
-		console.log(execSync(manifest['scripts'][script], {stdio: 'inherit'}).toString());
+		execSync(manifest['scripts'][script], {stdio: 'inherit'});
 	} catch (e) {
 		console.log(`An error occurred: ${e}.`);
 	}
