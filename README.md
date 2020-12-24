@@ -50,7 +50,7 @@ Commands:
   update                         Resolve dependencies and update lockfile
   install [options]              Install dependencies from lockfile
   licenses                       List licenses of the installed packages
-  run                            Run script defined in the manifest
+  run <script>                   Run script defined in the manifest
 ```
 
 #### Requirements
