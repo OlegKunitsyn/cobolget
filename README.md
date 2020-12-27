@@ -61,15 +61,15 @@ $ npm install -g cobolget
 ```
 
 #### Package Management
-The [Registry](https://cobolget.com) helps you distribute and integrate COBOL libraries into your projects by using 
+The [Registry](https://cobolget.com) helps you distribute and integrate COBOL libraries into your projects by using
 [cobolget](https://github.com/OlegKunitsyn/cobolget), an open-source command-line tool.
 You can transparently integrate packages from GitHub, GitLab or Gitee repositories, written in `gnucobol` or `entcobol` COBOL dialects.
-As well as public packages, the Registry lets you import your own private packages making COBOL code shared within your 
+As well as public packages, the Registry lets you import your own private packages making COBOL code shared within your
 Organization only. You can manage `Teams` and `Team Tokens` granting per-team installation rights for a limited period of time.
 
 <h5 align="center"><img src="/sequence.svg" alt="COBOLget" width="60%"></h5>
 
-In contrast to other Package Managers, COBOLget only analyzes `Manifest` files in [cobolget format](https://cobolget.com/schema.json) 
+In contrast to other Package Managers, COBOLget only analyzes `Manifest` files in [cobolget format](https://cobolget.com/schema.json)
 and does not clone nor crawl origin source-code. Package installation will fail if the maintainer decides restrict access to the repository or revoke the `Team Token`.
 
 #### Using Packages
@@ -82,15 +82,15 @@ Manifest modules.json created.
 
 Now you can add a dependency which delivers additional functionality:
 <details>
-<summary>GnuCOBOL</summary>
+<summary class="text-primary">GnuCOBOL</summary>
 
 ```
 $ cobolget add core-datetime
 Dependency 'core-datetime' has been added to the manifest.
 ```
 </details>
-<details>
-<summary>Enterprise COBOL</summary>
+<details class="pb-3">
+<summary class="text-primary">Enterprise COBOL</summary>
 
 ```
 $ cobolget add main-string
@@ -109,7 +109,7 @@ Keeping `modules-lock.json` under a version control is important to re-install t
 
 Let's install the dependencies:
 <details>
-<summary>GnuCOBOL</summary>
+<summary class="text-primary">GnuCOBOL</summary>
 
 ```
 $ cobolget install
@@ -133,8 +133,8 @@ Modules modules.cpy and modules.cbl updated.
 ```
 Directory `modules` contains source-code of the package and `modules.cpy` ready for inclusion into your project.
 </details>
-<details>
-<summary>IBM COBOL</summary>
+<details class="pb-3">
+<summary class="text-primary">Enterprise COBOL</summary>
 
 ```
 $ cobolget install
@@ -159,12 +159,19 @@ Directory `modules` contains source-code of the package and `modules.cbl` ready 
 
 For installing a private package you need the `Team Token` from your `Organization`:
 <details>
-<summary>GnuCOBOL</summary>
+<summary class="text-primary">GnuCOBOL</summary>
 
 ```
 $ cobolget add core-network
 $ cobolget update
 $ cobolget -t bca12d6c4efed0627c87f2e576b72bdb5ab88e34 install
+```
+</details>
+<details class="pb-3">
+<summary class="text-primary">Enterprise COBOL</summary>
+
+```
+in progress
 ```
 </details>
 
@@ -175,7 +182,7 @@ $ npm install -g cobolget
 $ cobolget init
 ```
 
-Open `modules.json` in text editor, fix default values and validate the `Manifest`: 
+Open `modules.json` in text editor, fix default values and validate the `Manifest`:
 ```
 $ cobolget validate
 ```
@@ -187,14 +194,14 @@ Make sure, that in your `Manifest`
 
 Commit and push `modules.json` to your repository. After release, you can import the package into the Registry by a link:
 <details>
-<summary>GnuCOBOL</summary>
+<summary class="text-primary">GnuCOBOL</summary>
 
 ```
 $ cobolget index https://gitlab.com/OlegKunitsyn/core-datetime
 ```
 </details>
-<details>
-<summary>Enterprise COBOL</summary>
+<details class="pb-3">
+<summary class="text-primary">Enterprise COBOL</summary>
 
 ```
 $ cobolget index https://github.com/OlegKunitsyn/main-string
@@ -203,28 +210,35 @@ $ cobolget index https://github.com/OlegKunitsyn/main-string
 
 New releases of the package you can index by a name:
 <details>
-<summary>GnuCOBOL</summary>
+<summary class="text-primary">GnuCOBOL</summary>
 
 ```
 $ cobolget index core-datetime
 ```
 </details>
-<details>
-<summary>Enterprise COBOL</summary>
+<details class="pb-3">
+<summary class="text-primary">Enterprise COBOL</summary>
 
 ```
 $ cobolget index main-string
 ```
 </details>
 
-For indexing private packages you must submit `Repository Token` to associate a package with the Organization. 
+For indexing private packages you must submit `Repository Token` to associate a package with the Organization.
 Follow [GitLab](https://gitlab.com/profile/personal_access_tokens) or [GitHub](https://github.com/settings/tokens/new) instructions.
 In the example below Organization is `cobolget`, but use your own.
 <details>
-<summary>GnuCOBOL</summary>
+<summary class="text-primary">GnuCOBOL</summary>
 
 ```
 $ cobolget -t DMNZpM9LzMyvswqE6yzz -o cobolget index https://gitlab.com/OlegKunitsyn/core-network
+```
+</details>
+<details class="pb-3">
+<summary class="text-primary">Enterprise COBOL</summary>
+
+```
+in progress
 ```
 </details>
 
