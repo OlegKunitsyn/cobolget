@@ -28,7 +28,6 @@
 - COBOL dialects
     - GnuCOBOL
     - IBM Enterprise COBOL
-    - Fujitsu NetCOBOL
 - List licenses of the installed packages
 - Run scripts
 
@@ -37,20 +36,20 @@ $ cobolget
 Usage: cobolget <command> [options]
 
 Options:
-  -v, --version                  output the version number
-  -h, --help                     output usage information
+  -v, --version                         output the version number
+  -h, --help                            output usage information
 
 Commands:
-  list <keyword>                 List packages in the registry
-  index [options] <name|url>     Import or update the package in the registry
-  init                           Create manifest file
-  validate                       Validate manifest file
-  add [options] <dependency>     Add package to the manifest
-  remove [options] <dependency>  Remove package from the manifest
-  update                         Resolve dependencies and update lockfile
-  install [options]              Install dependencies from lockfile
-  licenses                       List licenses of the installed packages
-  run <script>                   Run script defined in the manifest
+  list <keyword>                        List packages in the registry
+  index [options] <name|url>            Import or update the package in the registry
+  init                                  Create manifest file
+  validate                              Validate manifest file
+  add [options] <dependency> [version]  Add package to the manifest
+  remove [options] <dependency>         Remove package from the manifest
+  update                                Resolve dependencies and update lockfile
+  install [options]                     Install dependencies from lockfile
+  licenses                              List licenses of the installed packages
+  run <script>                          Run script defined in the manifest
 ```
 
 #### Requirements
@@ -64,7 +63,7 @@ $ npm install -g cobolget
 #### Package Management
 The [Registry](https://cobolget.com) helps you distribute and integrate COBOL libraries into your projects by using 
 [cobolget](https://github.com/OlegKunitsyn/cobolget), an open-source command-line tool.
-You can transparently integrate packages from GitHub, GitLab or Gitee repositories, written in `gnucobol`, `entcobol` or `netcobol` COBOL dialects.
+You can transparently integrate packages from GitHub, GitLab or Gitee repositories, written in `gnucobol` or `entcobol` COBOL dialects.
 As well as public packages, the Registry lets you import your own private packages making COBOL code shared within your 
 Organization only. You can manage `Teams` and `Team Tokens` granting per-team installation rights for a limited period of time.
 
@@ -82,12 +81,24 @@ Manifest modules.json created.
 ```
 
 Now you can add a dependency which delivers additional functionality:
+<details>
+<summary>GnuCOBOL</summary>
+
 ```
 $ cobolget add core-datetime
 Dependency 'core-datetime' has been added to the manifest.
 ```
+</details>
+<details>
+<summary>Enterprise COBOL</summary>
 
-By default, `cobolget` takes the latest version indexed on the Registry and adds it into `modules.json`.
+```
+$ cobolget add main-string
+Dependency 'main-string' has been added to the manifest.
+```
+</details>
+
+By default, `cobolget` takes the latest (highest) version available in the Registry and adds it into `modules.json`.
 ```
 $ cobolget update
 Lockfile modules-lock.json updated.
@@ -97,29 +108,65 @@ The tool resolves direct and inherited dependencies in the `Manifest` and create
 Keeping `modules-lock.json` under a version control is important to re-install the same dependencies in other environments, e.g. Continuous Integration.
 
 Let's install the dependencies:
+<details>
+<summary>GnuCOBOL</summary>
+
 ```
 $ cobolget install
-Downloading core-datetime 1.0.3
+Downloading core-datetime 3.0.5
 modules/core-datetime
+modules/core-datetime/.gitignore
+modules/core-datetime/.gitlab-ci.yml
+modules/core-datetime/Dockerfile
 modules/core-datetime/LICENSE
 modules/core-datetime/README.md
+modules/core-datetime/coboldoc/
+modules/core-datetime/coboldoc/README.md
+modules/core-datetime/coboldoc/datetime.cbl.md
 modules/core-datetime/modules.json
 modules/core-datetime/src/
 modules/core-datetime/src/datetime.cbl
 modules/core-datetime/tests/
 modules/core-datetime/tests/datetime-test.cbl
 modules/core-datetime/tests/modules.cpy
-Copybook modules.cpy updated.
+Modules modules.cpy and modules.cbl updated.
 ```
+Directory `modules` contains source-code of the package and `modules.cpy` ready for inclusion into your project.
+</details>
+<details>
+<summary>IBM COBOL</summary>
 
-Directory `modules` contains source-code from `core-datetime` package and `modules.cpy`, a Copybook with all COBOL modules ready for inclusion into your project.
+```
+$ cobolget install
+Downloading main-string 6.2.1
+modules/main-string
+modules/main-string/.gitignore
+modules/main-string/LICENSE
+modules/main-string/README.md
+modules/main-string/coboldoc/
+modules/main-string/coboldoc/README.md
+modules/main-string/coboldoc/string.cbl.md
+modules/main-string/modules.json
+modules/main-string/src/
+modules/main-string/src/string.cbl
+modules/main-string/tests/
+modules/main-string/tests/tests.cbl
+modules/main-string/tests/tests.jcl
+Modules modules.cpy and modules.cbl updated.
+```
+Directory `modules` contains source-code of the package and `modules.cbl` ready for compliation and linking with your project.
+</details>
 
 For installing a private package you need the `Team Token` from your `Organization`:
+<details>
+<summary>GnuCOBOL</summary>
+
 ```
 $ cobolget add core-network
 $ cobolget update
 $ cobolget -t bca12d6c4efed0627c87f2e576b72bdb5ab88e34 install
 ```
+</details>
 
 #### Publishing Packages
 To start using `cobolget` in your library you need the `Manifest` file which describes the library and its dependencies.
@@ -136,24 +183,50 @@ $ cobolget validate
 Make sure, that in your `Manifest`
 - all `dependencies` are valid COBOLget packages;
 - all `dependencies-debug` are valid COBOLget packages;
-- all `modules` are COBOL modules (programs and functions) in desired dialect, valid for inclusion as a Copybook.
+- all `modules` are COBOL modules (programs and functions) in desired dialect, without termination statments e.g. `STOP RUN`.
 
 Commit and push `modules.json` to your repository. After release, you can import the package into the Registry by a link:
+<details>
+<summary>GnuCOBOL</summary>
+
 ```
 $ cobolget index https://gitlab.com/OlegKunitsyn/core-datetime
 ```
+</details>
+<details>
+<summary>Enterprise COBOL</summary>
+
+```
+$ cobolget index https://github.com/OlegKunitsyn/main-string
+```
+</details>
 
 New releases of the package you can index by a name:
+<details>
+<summary>GnuCOBOL</summary>
+
 ```
 $ cobolget index core-datetime
 ```
+</details>
+<details>
+<summary>Enterprise COBOL</summary>
+
+```
+$ cobolget index main-string
+```
+</details>
 
 For indexing private packages you must submit `Repository Token` to associate a package with the Organization. 
 Follow [GitLab](https://gitlab.com/profile/personal_access_tokens) or [GitHub](https://github.com/settings/tokens/new) instructions.
 In the example below Organization is `cobolget`, but use your own.
+<details>
+<summary>GnuCOBOL</summary>
+
 ```
 $ cobolget -t DMNZpM9LzMyvswqE6yzz -o cobolget index https://gitlab.com/OlegKunitsyn/core-network
 ```
+</details>
 
 #### Versioning
 COBOLget implements [SemVer](https://semver.org/) versioning standard. You can specify constraints in the `Manifest` to satisfy concrete versions of the dependencies.
@@ -173,5 +246,9 @@ COBOLget implements [SemVer](https://semver.org/) versioning standard. You can s
 - [API documentation](https://cobolget.com/doc/)
 - [API client](https://github.com/OlegKunitsyn/cobolget)
 - [Schema](https://cobolget.com/schema.json)
+
+#### Roadmap
+- Inline copybooks in `modules.cbl`.
+- Support `netcobol` (Fujitsu NetCOBOL by GT Software) dialect.
 
 Your contribution is always welcome!

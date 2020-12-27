@@ -42,10 +42,10 @@ module.exports = function (argv: string[]): void {
 		.action(() => validate());
 
 	program
-		.command('add <dependency>')
+		.command('add <dependency> [version]')
 		.option('-d, --debug', 'Add debug package to the manifest')
 		.description('Add package to the manifest')
-		.action((dependency, options) => add(dependency, options));
+		.action((dependency, version, options) => add(dependency, version, options));
 
 	program
 		.command('remove <dependency>')

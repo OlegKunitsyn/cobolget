@@ -2,7 +2,7 @@ import { MANIFEST_NAME, DependencyOptions, getPackage, validateManifest } from '
 import * as path from 'path';
 import * as fs from 'fs';
 
-export async function add(dependency: string, options: DependencyOptions): Promise<any> {
+export async function add(dependency: string, version: string = '*', options: DependencyOptions): Promise<any> {
 	try {
 		const manifestFile = path.join(process.cwd(), MANIFEST_NAME);
 
@@ -17,9 +17,9 @@ export async function add(dependency: string, options: DependencyOptions): Promi
 		await getPackage(dependency);
 
 		if (options.debug) {
-			manifest['dependencies-debug'][dependency] = '*';
+			manifest['dependencies-debug'][dependency] = version;
 		} else {
-			manifest['dependencies'][dependency] = '*';
+			manifest['dependencies'][dependency] = version;
 		}
 		
 		// manifest valid?

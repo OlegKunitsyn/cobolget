@@ -6,6 +6,7 @@ export const MODULES_DIR = 'modules';
 export const MANIFEST_NAME = 'modules.json';
 export const LOCK_NAME = 'modules-lock.json';
 export const COPYBOOK_NAME = 'modules.cpy';
+export const LIBRARY_NAME = 'modules.cbl';
 export const MANIFEST_SCHEMA = BASE_URL + '/schema.json';
 export const MANIFEST_INIT = {
 	"name": "package-name",

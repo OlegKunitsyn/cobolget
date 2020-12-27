@@ -1,13 +1,25 @@
-import { IndexOptions, LOCK_NAME, MODULES_DIR, downloadZip, MANIFEST_NAME, COPYBOOK_NAME } from './api';
+import { IndexOptions, LOCK_NAME, MODULES_DIR, downloadZip, MANIFEST_NAME, COPYBOOK_NAME, LIBRARY_NAME } from './api';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as unzipper from 'unzipper';
 
 export async function install(options: IndexOptions): Promise<any> {
 	try {
+		const fileCopybook = path.join(process.cwd(), MODULES_DIR, COPYBOOK_NAME);
+		const fileLibrary = path.join(process.cwd(), MODULES_DIR, LIBRARY_NAME);
 		const modulesDir = path.join(process.cwd(), MODULES_DIR);
+
+		// create modules dir
 		if (!fs.existsSync(modulesDir)) {
 			fs.mkdirSync(modulesDir);
+		}
+
+		// remove modules if any
+		if (fs.existsSync(fileCopybook)) {
+			fs.unlinkSync(fileCopybook);
+		}
+		if (fs.existsSync(fileLibrary)) {
+			fs.unlinkSync(fileLibrary);
 		}
 
 		let copybook: Array<string> = [];
@@ -20,18 +32,6 @@ export async function install(options: IndexOptions): Promise<any> {
 
 			const directory = await unzipper.Open.buffer(zip);
 			const file = directory.files.find((entry) => entry.path.endsWith(MANIFEST_NAME));
-
-			// add modules
-			const manifest = JSON.parse((await file.buffer()).toString());
-			if (lock[item].debug) {
-				manifest.modules.forEach((module: string) => {
-					copybook.push(`      D COPY "${module}" OF "modules/${lock[item].name}".`);
-				});
-			} else {
-				manifest.modules.forEach((module: string) => {
-					copybook.push(`       COPY "${module}" OF "modules/${lock[item].name}".`);
-				});
-			}
 
 			// extract zip
 			const prefix = file.path.replace(MANIFEST_NAME, '');
@@ -47,13 +47,29 @@ export async function install(options: IndexOptions): Promise<any> {
 				}
 				console.log(file);
 			}
+
+			// add modules
+			const manifest = JSON.parse((await file.buffer()).toString());
+			if (lock[item].debug) {
+				manifest.modules.forEach((module: string) => {
+					copybook.push(`      D COPY "${module}" OF "${MODULES_DIR}/${lock[item].name}".`);
+					fs.appendFileSync(fileLibrary, fs.readFileSync(path.join(process.cwd(), MODULES_DIR, lock[item].name, module)).toString());
+					fs.appendFileSync(fileLibrary, "\n");
+				});
+			} else {
+				manifest.modules.forEach((module: string) => {
+					copybook.push(`       COPY "${module}" OF "${MODULES_DIR}/${lock[item].name}".`);
+					fs.appendFileSync(fileLibrary, fs.readFileSync(path.join(process.cwd(), MODULES_DIR, lock[item].name, module)).toString());
+					fs.appendFileSync(fileLibrary, "\n");
+				});
+			}
 		}
 		// add EOF
 		copybook.push('');
 
 		// save copybook
 		fs.writeFileSync(path.join(process.cwd(), MODULES_DIR, COPYBOOK_NAME), copybook.join("\n"));
-		console.log(`Copybook ${COPYBOOK_NAME} updated.`);
+		console.log(`Modules ${COPYBOOK_NAME} and ${LIBRARY_NAME} updated.`);
 	} catch (e) {
 		console.log(`An error occurred: ${e}.`);
 	}
