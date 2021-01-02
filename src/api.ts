@@ -11,7 +11,7 @@ export const MANIFEST_SCHEMA = BASE_URL + '/schema.json';
 export const MANIFEST_INIT = {
 	"name": "package-name",
 	"description": "Short description",
-	"modules": ["src/module.cbl"],
+	"modules": [],
 	"dialect": "gnucobol",
 	"licenses": ["MIT"],
 	"authors": ["Author"],

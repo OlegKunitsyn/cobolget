@@ -8,6 +8,7 @@ export async function install(options: IndexOptions): Promise<any> {
 		const fileCopybook = path.join(process.cwd(), MODULES_DIR, COPYBOOK_NAME);
 		const fileLibrary = path.join(process.cwd(), MODULES_DIR, LIBRARY_NAME);
 		const modulesDir = path.join(process.cwd(), MODULES_DIR);
+		const manifestParent = JSON.parse(fs.readFileSync(path.join(process.cwd(), MANIFEST_NAME)).toString());
 
 		// create modules dir
 		if (!fs.existsSync(modulesDir)) {
@@ -64,6 +65,14 @@ export async function install(options: IndexOptions): Promise<any> {
 				});
 			}
 		}
+
+		// add parent modules
+		manifestParent['modules'].forEach((module: string) => {
+			copybook.push(`       COPY "${module}".`);
+			fs.appendFileSync(fileLibrary, fs.readFileSync(path.join(process.cwd(), module)).toString());
+			fs.appendFileSync(fileLibrary, "\n");
+		});
+
 		// add EOF
 		copybook.push('');
 
