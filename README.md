@@ -171,7 +171,9 @@ $ cobolget -t bca12d6c4efed0627c87f2e576b72bdb5ab88e34 install
 <summary class="text-primary">Enterprise COBOL</summary>
 
 ```
-in progress
+$ cobolget add main-bitwise
+$ cobolget update
+$ cobolget -t bca12d6c4efed0627c87f2e576b72bdb5ab88e34 install
 ```
 </details>
 
@@ -238,7 +240,7 @@ $ cobolget -t DMNZpM9LzMyvswqE6yzz -o cobolget index https://gitlab.com/OlegKuni
 <summary class="text-primary">Enterprise COBOL</summary>
 
 ```
-in progress
+$ cobolget -t DMNZpM9LzMyvswqE6yzz -o cobolget index https://gitlab.com/OlegKunitsyn/main-bitwise
 ```
 </details>
 
