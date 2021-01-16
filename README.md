@@ -14,7 +14,7 @@
   <a href="https://npmjs.com/package/cobolget" title="View project on NPM"><img src="https://img.shields.io/npm/dm/cobolget.svg" alt="Downloads" /></a>
 </p>
 
-#### Features
+### Features
 - List packages in the registry
 - Index (import new or update existing) packages from the repositories, such as
     - GitHub public
@@ -52,15 +52,15 @@ Commands:
   run <script*>                         Run matching script(s) defined in the manifest
 ```
 
-#### Requirements
+### Requirements
 - NodeJS 8+
 
-#### Installation
+### Installation
 ```
 $ npm install -g cobolget
 ```
 
-#### Package Management
+### Package Management
 The [Registry](https://cobolget.com) helps you distribute and integrate COBOL libraries into your projects by using
 [cobolget](https://github.com/OlegKunitsyn/cobolget), an open-source command-line tool.
 You can transparently integrate packages from GitHub, GitLab or Gitee repositories, written in `gnucobol` or `entcobol` COBOL dialects.
@@ -72,7 +72,7 @@ Organization only. You can manage `Teams` and `Team Tokens` granting per-team in
 In contrast to other Package Managers, COBOLget only analyzes `Manifest` files in [JSON format](https://cobolget.com/schema.json)
 and does not clone nor crawl origin source-code. Package installation will fail if the maintainer decides restrict access to the repository or revoke the `Team Token`.
 
-#### Using Packages
+### Using Packages
 To start using `cobolget` in your project you need the `Manifest` file which describes the project and its dependencies.
 ```
 $ npm install -g cobolget
@@ -82,7 +82,7 @@ Manifest modules.json created.
 
 Now you can add a dependency which delivers additional functionality:
 <details>
-<summary class="text-primary">GnuCOBOL</summary>
+<summary>GnuCOBOL</summary>
 
 ```
 $ cobolget add core-datetime
@@ -90,7 +90,7 @@ Dependency 'core-datetime' has been added to the manifest.
 ```
 </details>
 <details>
-<summary class="text-primary">Enterprise COBOL</summary>
+<summary>Enterprise COBOL</summary>
 
 ```
 $ cobolget add main-string
@@ -109,7 +109,7 @@ Keeping `modules-lock.json` under a version control is important to re-install t
 
 Let's install the dependencies:
 <details>
-<summary class="text-primary">GnuCOBOL</summary>
+<summary>GnuCOBOL</summary>
 
 ```
 $ cobolget install
@@ -134,7 +134,7 @@ Modules modules.cpy and modules.cbl updated.
 Directory `modules` contains source-code of the package and `modules.cpy` ready for inclusion into your project.
 </details>
 <details>
-<summary class="text-primary">Enterprise COBOL</summary>
+<summary>Enterprise COBOL</summary>
 
 ```
 $ cobolget install
@@ -159,7 +159,7 @@ Directory `modules` contains source-code of the package and `modules.cbl` ready 
 
 For installing a private package you need the `Team Token` from your `Organization`:
 <details>
-<summary class="text-primary">GnuCOBOL</summary>
+<summary>GnuCOBOL</summary>
 
 ```
 $ cobolget add core-network
@@ -168,7 +168,7 @@ $ cobolget -t bca12d6c4efed0627c87f2e576b72bdb5ab88e34 install
 ```
 </details>
 <details>
-<summary class="text-primary">Enterprise COBOL</summary>
+<summary>Enterprise COBOL</summary>
 
 ```
 $ cobolget add main-bitwise
@@ -177,7 +177,7 @@ $ cobolget -t bca12d6c4efed0627c87f2e576b72bdb5ab88e34 install
 ```
 </details>
 
-#### Publishing Packages
+### Publishing Packages
 To start using `cobolget` in your library you need the `Manifest` file which describes the library and its dependencies.
 ```
 $ npm install -g cobolget
@@ -196,14 +196,14 @@ Make sure, that in your `Manifest`
 
 Commit and push `modules.json` to your repository. After release, you can import the package into the Registry by a link:
 <details>
-<summary class="text-primary">GnuCOBOL</summary>
+<summary>GnuCOBOL</summary>
 
 ```
 $ cobolget index https://gitlab.com/OlegKunitsyn/core-datetime
 ```
 </details>
 <details>
-<summary class="text-primary">Enterprise COBOL</summary>
+<summary>Enterprise COBOL</summary>
 
 ```
 $ cobolget index https://github.com/OlegKunitsyn/main-string
@@ -212,14 +212,14 @@ $ cobolget index https://github.com/OlegKunitsyn/main-string
 
 New releases of the package you can index by a name:
 <details>
-<summary class="text-primary">GnuCOBOL</summary>
+<summary>GnuCOBOL</summary>
 
 ```
 $ cobolget index core-datetime
 ```
 </details>
 <details>
-<summary class="text-primary">Enterprise COBOL</summary>
+<summary>Enterprise COBOL</summary>
 
 ```
 $ cobolget index main-string
@@ -230,21 +230,21 @@ For indexing private packages you must submit `Repository Token` to associate a 
 Follow [GitLab](https://gitlab.com/profile/personal_access_tokens) or [GitHub](https://github.com/settings/tokens/new) instructions.
 In the example below Organization is `cobolget`, but use your own.
 <details>
-<summary class="text-primary">GnuCOBOL</summary>
+<summary>GnuCOBOL</summary>
 
 ```
 $ cobolget -t DMNZpM9LzMyvswqE6yzz -o cobolget index https://gitlab.com/OlegKunitsyn/core-network
 ```
 </details>
 <details>
-<summary class="text-primary">Enterprise COBOL</summary>
+<summary>Enterprise COBOL</summary>
 
 ```
 $ cobolget -t DMNZpM9LzMyvswqE6yzz -o cobolget index https://gitlab.com/OlegKunitsyn/main-bitwise
 ```
 </details>
 
-#### Versioning
+### Versioning
 COBOLget implements [SemVer](https://semver.org/) versioning standard. You can specify constraints in the `Manifest` to satisfy concrete versions of the dependencies.
 
 | Operator | Constraint             | Example                  |
@@ -259,7 +259,7 @@ COBOLget implements [SemVer](https://semver.org/) versioning standard. You can s
 | ~        | Approximately equal to | "core-string": "~1.0.1"  |
 
 
-#### Scripting
+### Scripting
 You can specify a command within `scripts` property and run it
 ```
 $ cobolget run <script>
@@ -295,12 +295,12 @@ $ cobolget run b
 ```
 The batch of commands stops upon the the first failure (non-zero exit code).
 
-#### Development
+### Development
 - [API documentation](https://cobolget.com/doc/)
 - [API client](https://github.com/OlegKunitsyn/cobolget)
 - [Schema](https://cobolget.com/schema.json)
 
-#### Roadmap
+### Roadmap
 - Inline copybooks in `modules.cbl`.
 - Support `netcobol` (Fujitsu NetCOBOL by GT Software) dialect.
 
