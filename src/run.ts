@@ -16,12 +16,17 @@ export async function run(script: string): Promise<any> {
 
 
 		// script exists?
-		if (!manifest.hasOwnProperty('scripts') || !manifest['scripts'].hasOwnProperty(script)) {
-			console.log(`Unknown script ${script}.`);
+		if (!manifest.hasOwnProperty('scripts')) {
+			console.log(`No scripts found.`);
 			return;
 		}
 
-		execSync(manifest['scripts'][script], {stdio: 'inherit'});
+		for (let name of Object.keys(manifest['scripts'])) {
+			if (name.startsWith(script)) {
+				execSync(manifest['scripts'][name], {stdio: 'inherit'});
+			}
+		}
+		
 	} catch (e) {
 		console.log(`An error occurred: ${e}.`);
 	}

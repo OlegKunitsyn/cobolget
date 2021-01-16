@@ -16,7 +16,8 @@ export const MANIFEST_INIT = {
 	"licenses": ["MIT"],
 	"authors": ["Author"],
 	"dependencies": {},
-	"dependencies-debug": {}
+	"dependencies-debug": {},
+	"scripts": {}
 };
 const client = new rc.HttpClient(API_AGENT);
 

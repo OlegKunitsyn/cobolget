@@ -70,8 +70,8 @@ module.exports = function (argv: string[]): void {
 		.action(() => licenses());
 
 	program
-		.command('run <script>')
-		.description('Run script defined in the manifest')
+		.command('run <script*>')
+		.description('Run matching script(s) defined in the manifest')
 		.action((script) => run(script));
 
 	program

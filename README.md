@@ -49,7 +49,7 @@ Commands:
   update                                Resolve dependencies and update lockfile
   install [options]                     Install dependencies from lockfile
   licenses                              List licenses of the installed packages
-  run <script>                          Run script defined in the manifest
+  run <script*>                         Run matching script(s) defined in the manifest
 ```
 
 #### Requirements
@@ -69,7 +69,7 @@ Organization only. You can manage `Teams` and `Team Tokens` granting per-team in
 
 <h5 align="center"><img src="/sequence.svg" alt="COBOLget" width="60%"></h5>
 
-In contrast to other Package Managers, COBOLget only analyzes `Manifest` files in [cobolget format](https://cobolget.com/schema.json)
+In contrast to other Package Managers, COBOLget only analyzes `Manifest` files in [JSON format](https://cobolget.com/schema.json)
 and does not clone nor crawl origin source-code. Package installation will fail if the maintainer decides restrict access to the repository or revoke the `Team Token`.
 
 #### Using Packages
@@ -89,7 +89,7 @@ $ cobolget add core-datetime
 Dependency 'core-datetime' has been added to the manifest.
 ```
 </details>
-<details class="pb-3">
+<details>
 <summary class="text-primary">Enterprise COBOL</summary>
 
 ```
@@ -133,7 +133,7 @@ Modules modules.cpy and modules.cbl updated.
 ```
 Directory `modules` contains source-code of the package and `modules.cpy` ready for inclusion into your project.
 </details>
-<details class="pb-3">
+<details>
 <summary class="text-primary">Enterprise COBOL</summary>
 
 ```
@@ -167,7 +167,7 @@ $ cobolget update
 $ cobolget -t bca12d6c4efed0627c87f2e576b72bdb5ab88e34 install
 ```
 </details>
-<details class="pb-3">
+<details>
 <summary class="text-primary">Enterprise COBOL</summary>
 
 ```
@@ -202,7 +202,7 @@ Commit and push `modules.json` to your repository. After release, you can import
 $ cobolget index https://gitlab.com/OlegKunitsyn/core-datetime
 ```
 </details>
-<details class="pb-3">
+<details>
 <summary class="text-primary">Enterprise COBOL</summary>
 
 ```
@@ -218,7 +218,7 @@ New releases of the package you can index by a name:
 $ cobolget index core-datetime
 ```
 </details>
-<details class="pb-3">
+<details>
 <summary class="text-primary">Enterprise COBOL</summary>
 
 ```
@@ -236,7 +236,7 @@ In the example below Organization is `cobolget`, but use your own.
 $ cobolget -t DMNZpM9LzMyvswqE6yzz -o cobolget index https://gitlab.com/OlegKunitsyn/core-network
 ```
 </details>
-<details class="pb-3">
+<details>
 <summary class="text-primary">Enterprise COBOL</summary>
 
 ```
@@ -257,6 +257,43 @@ COBOLget implements [SemVer](https://semver.org/) versioning standard. You can s
 | =        | Equal                  | "core-string": "=1.0.2"  |
 | x        | Stand in               | "core-string": "1.0.x"   |
 | ~        | Approximately equal to | "core-string": "~1.0.1"  |
+
+
+#### Scripting
+You can specify a command within `scripts` property and run it
+```
+$ cobolget run <script>
+```
+
+or specify a script that runs several commands at once
+```
+{
+  ...
+  "scripts": {
+    "cobolget": "cobolget update && cobolget install"
+  }  
+}
+```
+or specify nested automation scenarios grouping scripts by a name:
+```
+{
+  ...
+  "scripts": {
+    "build:docs": "coboldoc generate src/* -o docs",
+    "build:package:update": "cobolget update",
+    "build:package:install": "cobolget install",
+    "build:upload": "zowe zos-files upload file-to-data-set modules/modules.cbl <USER ID>.CBL",
+    "tests:upload": "zowe zos-files upload file-to-data-set tests/tests.cbl <USER ID>.CBL",
+    "tests:run": "zowe jobs submit local-file tests/tests.jcl --view-all-spool-content"
+  }
+}
+```
+
+Delimiter can be any. In this example argument `build:package` will match two scripts, and next example will execute all `build` scripts one by one:
+```
+$ cobolget run b
+```
+The batch of commands stops upon the the first failure (non-zero exit code).
 
 #### Development
 - [API documentation](https://cobolget.com/doc/)
