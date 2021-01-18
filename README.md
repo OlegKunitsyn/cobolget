@@ -62,7 +62,7 @@ $ npm install -g cobolget
 
 ### Package Management
 The [Registry](https://cobolget.com) helps you distribute and integrate COBOL libraries into your projects by using
-[cobolget](https://github.com/OlegKunitsyn/cobolget), an open-source command-line tool.
+[cobolget](https://www.npmjs.com/package/cobolget), an open-source command-line tool.
 You can transparently integrate packages from GitHub, GitLab or Gitee repositories, written in `gnucobol` or `entcobol` COBOL dialects.
 As well as public packages, the Registry lets you import your own private packages making COBOL code shared within your
 Organization only. You can manage `Teams` and `Team Tokens` granting per-team installation rights for a limited period of time.
@@ -154,7 +154,7 @@ modules/main-string/tests/tests.cbl
 modules/main-string/tests/tests.jcl
 Modules modules.cpy and modules.cbl updated.
 ```
-Directory `modules` contains source-code of the package and `modules.cbl` ready for compliation and linking with your project.
+Directory `modules` contains source-code of the package and `modules.cbl` ready for compilation and linking with your project.
 </details>
 
 For installing a private package you need the `Team Token` from your `Organization`:
@@ -192,7 +192,7 @@ $ cobolget validate
 Make sure, that in your `Manifest`
 - all `dependencies` are valid COBOLget packages;
 - all `dependencies-debug` are valid COBOLget packages;
-- all `modules` are COBOL modules (programs and functions) in desired dialect, without termination statments e.g. `STOP RUN`.
+- all `modules` are COBOL modules (programs and functions) in desired dialect, without termination statements e.g. `STOP RUN`.
 
 Commit and push `modules.json` to your repository. After release, you can import the package into the Registry by a link:
 <details>
@@ -293,7 +293,7 @@ Delimiter can be any. In this example argument `build:package` will match two sc
 ```
 $ cobolget run b
 ```
-The batch of commands stops upon the the first failure (non-zero exit code).
+The batch of commands stops upon the first failure (non-zero exit code).
 
 ### Development
 - [API documentation](https://cobolget.com/doc/)
