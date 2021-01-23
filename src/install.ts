@@ -10,6 +10,18 @@ export async function install(options: IndexOptions): Promise<any> {
 		const modulesDir = path.join(process.cwd(), MODULES_DIR);
 		const manifestParent = JSON.parse(fs.readFileSync(path.join(process.cwd(), MANIFEST_NAME)).toString());
 
+		// find installed
+		let installed = {};
+		if (fs.existsSync(fileCopybook)) {
+			const regex = /\s+@package\s+([a-z0-9\\-]+)\s+(.*)\s?/g;
+			fs.readFileSync(fileCopybook).toString().split(/\n/).forEach((line: string) => {
+				let match = regex.exec(line);
+				if (match) {
+					installed[match[1]] = match[2];
+				}
+			});
+		}
+
 		// create modules dir
 		if (!fs.existsSync(modulesDir)) {
 			fs.mkdirSync(modulesDir);
@@ -27,30 +39,37 @@ export async function install(options: IndexOptions): Promise<any> {
 		const lockFile = path.join(process.cwd(), LOCK_NAME);
 		const lock = JSON.parse(fs.readFileSync(lockFile).toString());
 		for (let item in lock) {
-			// download zip
-			console.log(`Downloading ${lock[item].name} ${lock[item].version}`);
-			const zip = await downloadZip(lock[item].name, lock[item].version, options.token !== undefined ? options.token : null);
+			copybook.push(`      *> @package ${lock[item].name} ${lock[item].version}`);
 
-			const directory = await unzipper.Open.buffer(zip);
-			const file = directory.files.find((entry) => entry.path.endsWith(MANIFEST_NAME));
+			let manifest: any;
+			if (!fs.existsSync(path.join(process.cwd(), MODULES_DIR, lock[item].name)) || !installed.hasOwnProperty(lock[item].name) || installed[lock[item].name] !== lock[item].version) {
+				// download zip
+				console.log(`Downloading ${lock[item].name} ${lock[item].version}`);
+				const zip = await downloadZip(lock[item].name, lock[item].version, options.token !== undefined ? options.token : null);
 
-			// extract zip
-			const prefix = file.path.replace(MANIFEST_NAME, '');
-			for (const entry of directory.files) {
-				entry.path = entry.path.replace(prefix, '');
-				const file = path.join(process.cwd(), MODULES_DIR, lock[item].name, entry.path.replace(prefix, ''));
-				if (entry.type === 'Directory') {
-					if (!fs.existsSync(file)) {
-						fs.mkdirSync(file);
+				const directory = await unzipper.Open.buffer(zip);
+				const file = directory.files.find((entry) => entry.path.endsWith(MANIFEST_NAME));
+
+				// extract zip
+				const prefix = file.path.replace(MANIFEST_NAME, '');
+				for (const entry of directory.files) {
+					entry.path = entry.path.replace(prefix, '');
+					const file = path.join(process.cwd(), MODULES_DIR, lock[item].name, entry.path.replace(prefix, ''));
+					if (entry.type === 'Directory') {
+						if (!fs.existsSync(file)) {
+							fs.mkdirSync(file);
+						}
+					} else {
+						entry.stream().pipe(fs.createWriteStream(file));
 					}
-				} else {
-					entry.stream().pipe(fs.createWriteStream(file));
+					console.log(file);
 				}
-				console.log(file);
+				manifest = JSON.parse((await file.buffer()).toString());
+			} else {
+				manifest = JSON.parse(fs.readFileSync(path.join(process.cwd(), MODULES_DIR, lock[item].name, MANIFEST_NAME)).toString());
 			}
 
 			// add modules
-			const manifest = JSON.parse((await file.buffer()).toString());
 			if (lock[item].debug) {
 				manifest.modules.forEach((module: string) => {
 					copybook.push(`      D COPY "${module}" OF "${MODULES_DIR}/${lock[item].name}".`);

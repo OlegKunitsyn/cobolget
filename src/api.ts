@@ -9,6 +9,7 @@ export const COPYBOOK_NAME = 'modules.cpy';
 export const LIBRARY_NAME = 'modules.cbl';
 export const MANIFEST_SCHEMA = BASE_URL + '/schema.json';
 export const MANIFEST_INIT = {
+	"$schema": MANIFEST_SCHEMA,
 	"name": "package-name",
 	"description": "Short description",
 	"modules": [],

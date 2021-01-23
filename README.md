@@ -113,16 +113,13 @@ Let's install the dependencies:
 
 ```
 $ cobolget install
-Downloading core-datetime 3.0.5
+Downloading core-datetime 3.0.6
 modules/core-datetime
 modules/core-datetime/.gitignore
 modules/core-datetime/.gitlab-ci.yml
 modules/core-datetime/Dockerfile
 modules/core-datetime/LICENSE
 modules/core-datetime/README.md
-modules/core-datetime/coboldoc/
-modules/core-datetime/coboldoc/README.md
-modules/core-datetime/coboldoc/datetime.cbl.md
 modules/core-datetime/modules.json
 modules/core-datetime/src/
 modules/core-datetime/src/datetime.cbl
@@ -138,14 +135,14 @@ Directory `modules` contains source-code of the package and `modules.cpy` ready 
 
 ```
 $ cobolget install
-Downloading main-string 6.2.1
+Downloading main-string 6.2.3
 modules/main-string
+modules/main-string/.github/
+modules/main-string/.github/workflows/
+modules/main-string/.github/workflows/nodejs.yml
 modules/main-string/.gitignore
 modules/main-string/LICENSE
 modules/main-string/README.md
-modules/main-string/coboldoc/
-modules/main-string/coboldoc/README.md
-modules/main-string/coboldoc/string.cbl.md
 modules/main-string/modules.json
 modules/main-string/src/
 modules/main-string/src/string.cbl
