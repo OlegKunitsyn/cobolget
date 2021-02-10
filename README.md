@@ -28,6 +28,7 @@
 - COBOL dialects
     - GnuCOBOL
     - IBM Enterprise COBOL
+    - Fujitsu NetCOBOL
 - List licenses of the installed packages
 - Run scripts
 
@@ -63,7 +64,7 @@ $ npm install -g cobolget
 ### Package Management
 The [Registry](https://cobolget.com) helps you distribute and integrate COBOL libraries into your projects by using
 [cobolget](https://www.npmjs.com/package/cobolget), an open-source command-line tool.
-You can transparently integrate packages from GitHub, GitLab or Gitee repositories, written in `gnucobol` or `entcobol` COBOL dialects.
+You can transparently integrate packages from GitHub, GitLab or Gitee repositories, written in `gnucobol`, `entcobol` or `netcobol` COBOL dialects.
 As well as public packages, the Registry lets you import your own private packages making COBOL code shared within your
 Organization only. You can manage `Teams` and `Team Tokens` granting per-team installation rights for a limited period of time.
 
@@ -95,6 +96,14 @@ Dependency 'core-datetime' has been added to the manifest.
 ```
 $ cobolget add main-string
 Dependency 'main-string' has been added to the manifest.
+```
+</details>
+<details>
+<summary>NetCOBOL</summary>
+
+```
+$ cobolget add fuji-bitwise
+Dependency 'fuji-bitwise' has been added to the manifest.
 ```
 </details>
 
@@ -153,6 +162,23 @@ Modules modules.cpy and modules.cbl updated.
 ```
 Directory `modules` contains source-code of the package and `modules.cbl` ready for compilation and linking with your project.
 </details>
+<details>
+<summary>NetCOBOL</summary>
+
+```
+$ cobolget install
+Downloading fuji-bitwise 3.2.1
+modules/fuji-bitwise
+modules/fuji-bitwise/.gitignore
+modules/fuji-bitwise/LICENSE
+modules/fuji-bitwise/README.md
+modules/fuji-bitwise/modules.json
+modules/fuji-bitwise/src/
+modules/fuji-bitwise/src/bitwise.cbl
+Modules modules.cpy and modules.cbl updated.
+```
+Directory `modules` contains source-code of the package and `modules.cbl` ready for compilation and linking with your project.
+</details>
 
 For installing a private package you need the `Team Token` from your `Organization`:
 <details>
@@ -206,6 +232,13 @@ $ cobolget index https://gitlab.com/OlegKunitsyn/core-datetime
 $ cobolget index https://github.com/OlegKunitsyn/main-string
 ```
 </details>
+<details>
+<summary>NetCOBOL</summary>
+
+```
+$ cobolget index https://github.com/OlegKunitsyn/fuji-bitwise
+```
+</details>
 
 New releases of the package you can index by a name:
 <details>
@@ -220,6 +253,13 @@ $ cobolget index core-datetime
 
 ```
 $ cobolget index main-string
+```
+</details>
+<details>
+<summary>NetCOBOL</summary>
+
+```
+$ cobolget index fuji-bitwise
 ```
 </details>
 
@@ -299,6 +339,5 @@ The batch of commands stops upon the first failure (non-zero exit code).
 
 ### Roadmap
 - Inline copybooks in `modules.cbl`.
-- Support `netcobol` (Fujitsu NetCOBOL by GT Software) dialect.
 
 Your contribution is always welcome!
