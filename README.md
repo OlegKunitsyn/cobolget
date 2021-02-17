@@ -71,7 +71,7 @@ Organization only. You can manage `Teams` and `Team Tokens` granting per-team in
 <h5 align="center"><img src="/sequence.svg" alt="COBOLget" width="60%"></h5>
 
 In contrast to other Package Managers, COBOLget only analyzes `Manifest` files in [JSON format](https://cobolget.com/schema.json)
-and does not clone nor crawl origin source-code. Package installation will fail if the maintainer decides restrict access to the repository or revoke the `Team Token`.
+and does not clone nor crawl the source-code. Package installation will fail if the maintainer decides restrict access to the repository or revoke the `Team Token`. COBOLget protects packages from a malicious take-over. Organizations, packages and origins are enforced by the Registry reserving distinct names for the maintainer upon the first indexing, forever. Disadvantage of this security policy is an inability to have mirrors of the repositories and migrate the packages between them.
 
 ### Using Packages
 To start using `cobolget` in your project you need the `Manifest` file which describes the project and its dependencies.
