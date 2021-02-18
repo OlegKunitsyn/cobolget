@@ -17,11 +17,9 @@
 ### Features
 - List packages in the registry
 - Index (import new or update existing) packages from the repositories, such as
-    - GitHub public
-    - GitHub private
-    - GitLab public
-    - GitLab private
-    - Gitee public
+    - GitHub
+    - GitLab
+    - Gitee
 - Initialize and validate `Manifest`
 - Add, remove and resolve dependencies into `Lockfile`
 - Install COBOL packages
@@ -264,7 +262,7 @@ $ cobolget index fuji-bitwise
 </details>
 
 For indexing private packages you must submit `Repository Token` to associate a package with the Organization.
-Follow [GitLab](https://gitlab.com/profile/personal_access_tokens) or [GitHub](https://github.com/settings/tokens/new) instructions.
+Follow [GitLab](https://gitlab.com/profile/personal_access_tokens), [GitHub](https://github.com/settings/tokens/new) or [Gitee](https://gitee.com/profile/personal_access_tokens) instructions.
 In the example below Organization is `cobolget`, but use your own.
 <details>
 <summary>GnuCOBOL</summary>
