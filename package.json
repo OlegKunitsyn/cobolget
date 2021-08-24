@@ -1,6 +1,6 @@
 {
   "name": "cobolget",
-  "version": "3.13.24",
+  "version": "3.13.25",
   "description": "COBOL Package Manager",
   "repository": {
     "type": "git",
@@ -35,14 +35,14 @@
   "dependencies": {
     "commander": "^2.8.1",
     "glob": "^7.0.6",
-    "hosted-git-info": "^2.8.9",
+    "hosted-git-info": "2.8.9",
     "leven": "^3.1.0",
     "lodash": "^4.17.19",
     "parse-semver": "^1.1.1",
     "path-parse": "1.0.7",
     "semver": "^5.1.0",
     "typed-rest-client": "1.2.0",
-    "underscore": "^1.12.1",
+    "underscore": "1.12.1",
     "unzipper": "^0.10.11",
     "uuid": "^8.2.0"
   },
