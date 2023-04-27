@@ -41,7 +41,7 @@
     "parse-semver": "^1.1.1",
     "path-parse": "1.0.7",
     "semver": "^5.1.0",
-    "typed-rest-client": "1.2.0",
+    "typed-rest-client": "1.8.0",
     "underscore": "1.12.1",
     "unzipper": "^0.10.11",
     "uuid": "^8.2.0"
